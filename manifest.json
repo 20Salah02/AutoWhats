@@ -1,0 +1,30 @@
+{
+    "manifest_version": 3,
+    "name": "WhatsApp Auto Messenger",
+    "version": "1.0",
+    "description": "Send Auto Messages",
+    "permissions": [
+        "storage",
+        "scripting",
+        "activeTab"
+    ],
+    "host_permissions": ["https://web.whatsapp.com/*"],
+    "background": {
+      "service_worker": "background.js"
+    },
+    "action": {
+      "default_popup": "popup.html",
+      "default_icon": {
+        "16": "img.png",
+        "48": "img.png",
+        "128": "img.png"
+      }
+    },
+    "content_scripts": [
+      {
+        "matches": ["https://web.whatsapp.com/*"],
+        "js": ["content.js"]
+      }
+    ]
+}
+  

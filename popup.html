@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salahinio WhatsApp Bot</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="popup.css">
+    <script src="popup.js" defer></script>
+
+    <style>
+
+    </style>
+</head>
+<body>
+    <div class="container">
+    <main>
+        <div class="first-container">
+            <h2><i class="fab fa-whatsapp"></i> Wa Salah</h2>
+            
+            <div class="json-container">
+                <div class="file-input-container">
+                    <button id="importJsonBtn"><i class="fas fa-file-import"></i> Import JSON</button>
+                    <input type="file" id="jsonFile" accept=".json" style="display:none;">
+                </div>
+                
+                <label>Contacts List</label>
+                <textarea id="contactsList" rows="6" placeholder="Example: Salah, +1234567890&#10;Diana, +9876543210"></textarea>
+                <span class="contacts-counter"><span id="contactsCount">0</span> contacts</span>
+            </div>
+
+            <div class="message-composer">
+                <label>Message Template</label>
+                <div class="composer-container">
+                    <textarea id="messageTemplate" rows="4" placeholder="Hello [name], this is a test message from Wa Salah Bot. How are you today?"></textarea>
+                    <div class="composer-actions">
+                        <button id="attachButton" class="attach-btn" title="Attach file">
+                            <i class="fas fa-paperclip"></i>
+                            <input type="file" id="fileAttachment" style="display: none;">
+                        </button>
+                        <span id="fileName" class="file-name"></span>
+                        <button id="addSecondMsgBtn" class="add-msg-btn" title="Add second message">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="secondMessageContainer" class="message-composer" style="display: none;">
+                <label>Second Message</label>
+                <div class="composer-container">
+                    <textarea id="messageTemplate2" rows="4" placeholder="Additional message..."></textarea>
+                    
+                </div>
+            </div>
+
+            <button id="startBot"><i class="fas fa-robot"></i> Start Sending Messages</button>
+        </div>
+        
+        <div class="second-container">
+            <h3><i class="fas fa-chart-bar"></i> Results</h3>
+            
+            <div class="stats-container">
+                <div class="stat-item">
+                    <span class="stat-label success"><i class="fas fa-check-circle"></i> Sent successfully:</span>
+                    <span class="stat-value success" id="successCount">0</span>
+                </div>
+                
+                <div class="stat-item">
+                    <span class="stat-label duplicate"><i class="fas fa-redo"></i> Duplicates:</span>
+                    <span class="stat-value duplicate" id="duplicateCount">0</span>
+                </div>
+                
+                <div class="stat-item">
+                    <span class="stat-label failed"><i class="fas fa-times-circle"></i> Not on WhatsApp:</span>
+                    <span class="stat-value failed" id="failedCount">0</span>
+                </div>
+
+                <div class="stat-item">
+                    <div style="color: #4a6baf;" id="timeEstimation">
+                        <span class="stat-label"><i class="fas fa-clock"></i> Estimated time:</span>
+                        <span class="stat-value">-</span>
+                        <div class="time-details">(for 0 contacts)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+    <script>
+        document.getElementById('importJsonBtn').addEventListener('click', function() {
+            document.getElementById('jsonFile').click();
+        });
+
+        document.getElementById('contactsList').addEventListener('input', function() {
+            const text = this.value.trim();
+            const count = text ? text.split('\n').filter(line => line.trim() !== '').length : 0;
+            document.getElementById('contactsCount').textContent = count;
+        });
+    </script>
+</body>
+</html>
